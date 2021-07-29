@@ -62,7 +62,6 @@ public class Regressor {
         float[] score_array = outputs.getDataAsFloatArray();
         float score = Max(score_array);
         String pollution = String.format("%.5g%n", score);
-        // String pollution = String.valueOf(score);
 
         return pollution;
 
