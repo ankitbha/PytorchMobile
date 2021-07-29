@@ -23,8 +23,12 @@ public class Result extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.image);
         imageView.setImageBitmap(imageBitmap);
 
-        TextView textView = findViewById(R.id.label);
-        textView.setText(pred);
+        TextView textView_pred = findViewById(R.id.pred);
+        textView_pred.setText(pred);
+
+        String date = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(java.util.Calendar.getInstance().getTime());
+        TextView textView_date = findViewById(R.id.date);
+        textView_date.setText(date);
 
     }
 

@@ -60,12 +60,10 @@ public class Regressor {
         IValue inputs = IValue.from(tensor);
         Tensor outputs = model.forward(inputs).toTensor();
         float[] score_array = outputs.getDataAsFloatArray();
-        // float score = score_array[0];
         float score = Max(score_array);
-        String pollution = String.valueOf(score);
-        // int classIndex = argMax(scores);
+        String pollution = String.format("%.5g%n", score);
+        // String pollution = String.valueOf(score);
 
-        // return Constants.IMAGENET_CLASSES[classIndex];
         return pollution;
 
     }
