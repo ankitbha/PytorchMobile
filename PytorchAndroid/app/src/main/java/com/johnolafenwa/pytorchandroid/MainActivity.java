@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     int cameraRequestCode = 001;
 
-    Classifier classifier;
+    Regressor regressor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        classifier = new Classifier(Utils.assetFilePath(this,"mobilenet-v2.pt"));
+        regressor = new Regressor(Utils.assetFilePath(this,"mobile_model.pt"));
 
         Button capture = findViewById(R.id.capture);
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
             Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
 
-            String pred = classifier.predict(imageBitmap);
+            String pred = regressor.predict(imageBitmap);
             resultView.putExtra("pred",pred);
 
             startActivity(resultView);
