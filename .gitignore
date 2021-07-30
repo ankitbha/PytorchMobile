@@ -1,2 +1,6 @@
+# excluding heavy trained models
 *.pt
 *.ptl
+
+# excluding directories
+.gradle/
