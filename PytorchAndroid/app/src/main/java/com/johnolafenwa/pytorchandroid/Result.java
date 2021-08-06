@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.location.LocationManager;
 import android.location.Location;
-import 	android.content.Context;
+import android.content.Context;
 
 public class Result extends AppCompatActivity {
 
@@ -33,7 +33,9 @@ public class Result extends AppCompatActivity {
         TextView textView_date = findViewById(R.id.date);
         textView_date.setText(date);
 
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE); 
+	// TODO: request user for location permission here
+
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
@@ -43,6 +45,8 @@ public class Result extends AppCompatActivity {
 
         TextView textView_loc = findViewById(R.id.loc);
         textView_loc.setText(loc);
+
+	// TODO: request user for storage permission and store the resulting image
     }
 
 }
