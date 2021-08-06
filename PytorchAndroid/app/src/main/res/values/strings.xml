@@ -2,4 +2,15 @@
     <string name="app_name">PytorchAndroid</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_result">Result</string>
+
+    <string name="camera_unavailable"><b>Camera could not be
+    opened.</b>\nThis occurs when the camera is not available (for
+    example it is already in use), if the system has denied access
+    (for example when camera access has been disabled).</string>
+    <string name="camera_access_required">Camera access is required for this application</string>
+    <string name="ok">OK</string>
+    <string name="camera_permission_not_available">Permission to use camera is not available. Requesting camera permission.</string>
+    <string name="camera_permission_available">Camera permission is available.</string>
+    <string name="camera_permission_granted">Camera permission has been granted.</string>
+    <string name="camera_permission_denied">Camera permission request has been denied.</string>
 </resources>
