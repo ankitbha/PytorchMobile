@@ -1,9 +1,9 @@
 package com.johnolafenwa.pytorchandroid;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.Manifest;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -36,46 +36,14 @@ public class MainActivity extends AppCompatActivity
         regressor = new Regressor(Utils.assetFilePath(this,"mobile_model.pt"));
 
         Button capture = findViewById(R.id.capture);
-        capture.setOnClickListener(new View.OnClickListener(){
+        capture.setOnClickListener(new View.OnClickListener() {
 
 		@Override
 		public void onClick(View view){
-		    
-		    // TODO: check for camera permissions here before
-		    // launching the camera intent
-		    if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) 
-			== PackageManager.PERMISSION_GRANTED) {
-			// permission is already available, so we can start the camera
-			Snackbar.make(mLayout, R.string.camera_permission_available, Snackbar.LENGTH_SHORT).show();
-			startCamera();
-		    } else {
-			// permission is not available and must be requested
-			if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CAMERA)) {
-			    
-			    // provide a rationale and request permission
-			    Snackbar.make(mLayout, R.string.camera_access_required,
-					  Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok, new View.OnClickListener() {
-						  @Override
-						  public void onClick(View view) {
-						      // request the permission
-						      ActivityCompat.requestPermissions(MainActivity.this, 
-											new String[] {Manifest.permission.CAMERA},
-											CAMERA_REQUEST_CODE);
-						  }
-					      }).show();
-			} else {
-			    Snackbar.make(mLayout, R.string.camera_unavailable, Snackbar.LENGTH_SHORT).show();
-			    
-			    // request permission
-			    ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
-			}
-		    }
-		    
+		    startCameraView();
 		}
 	    });
-	
     }
-    
     
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -84,18 +52,12 @@ public class MainActivity extends AppCompatActivity
             // Request for camera permission.
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission has been granted. Start camera preview Activity.
-                Snackbar.make(mLayout, R.string.camera_permission_granted, Snackbar.LENGTH_SHORT).show();
                 startCamera();
             } else {
                 // Permission request was denied.
                 Snackbar.make(mLayout, R.string.camera_permission_denied, Snackbar.LENGTH_SHORT).show();
             }
         }
-    }
-
-    private void startCamera() {
-	Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
     }
 
     @Override
@@ -118,4 +80,35 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void startCameraView() {
+	// TODO: check for camera permissions here before launching
+	// the camera intent
+	if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+	    // permission is already available, so we can start the camera
+	    startCamera();
+	} else if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.CAMERA)) {
+	    // provide a rationale and request permission
+	    Snackbar.make(mLayout, R.string.camera_access_required, Snackbar.LENGTH_INDEFINITE)
+		.setAction(R.string.ok, new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+			    // request the permission
+			    requestCameraPermission();
+			}
+		    }).show();
+	} else {
+	    // permission is not available and must be requested
+	    Snackbar.make(mLayout, R.string.camera_access_required, Snackbar.LENGTH_SHORT).show();
+	    requestCameraPermission();
+	}
+    }
+
+    private void requestCameraPermission() {
+	ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+    }
+
+    private void startCamera() {
+	Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+    }
 }
