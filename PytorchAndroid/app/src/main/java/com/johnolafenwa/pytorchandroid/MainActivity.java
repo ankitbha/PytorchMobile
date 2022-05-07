@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-	mLayout = findViewById(R.id.main_layout);
+	    mLayout = findViewById(R.id.main_layout);
 	
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity
         Button capture = findViewById(R.id.capture);
         capture.setOnClickListener(new View.OnClickListener() {
 
-		@Override
-		public void onClick(View view){
-		    startCameraView();
-		}
+            @Override
+            public void onClick(View view){
+                startCameraView();
+            }
 	    });
     }
     
@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void requestCameraPermission() {
-	ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
+	    ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
     }
 
     private void startCamera() {
-	Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
     }
 }

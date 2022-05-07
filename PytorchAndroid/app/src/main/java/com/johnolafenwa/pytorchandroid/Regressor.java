@@ -5,7 +5,7 @@ import org.pytorch.Tensor;
 import org.pytorch.Module;
 import org.pytorch.IValue;
 import org.pytorch.torchvision.TensorImageUtils;
-import org.pytorch.LiteModuleLoader;
+//import org.pytorch.LiteModuleLoader;
 
 
 public class Regressor {
@@ -16,8 +16,8 @@ public class Regressor {
 
     public Regressor(String modelPath){
 
-        // model = Module.load(modelPath);
-        model = LiteModuleLoader.load(modelPath);
+         model = Module.load(modelPath);
+//        model = LiteModuleLoader.load(modelPath);
 
     }
 
